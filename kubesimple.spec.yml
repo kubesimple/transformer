@@ -1,0 +1,45 @@
+# Default version is '1'
+version: '1'
+# appname (default: generated)
+appname: my-app
+services:
+    # kind (required, one of app, db, disk)
+    - kind: app
+      # one of image or build (default: build from HEAD, tagged with git SHA1)
+      image: my-name/my-service:${.GitHash}
+      # builds from current checkout (default: build from HEAD with ./Dockerfile)
+      build: ./Dockerfile
+      # public (default: false, only for app types)
+      public: true || <options below>
+        # additional config options
+        # host (default: generated) By specifying host a TLS cert will be obtained from 
+        # Let's Encrypt.  You must have a CNAME pointing at the kubesimple loadbalancer to
+        # use your own domain name.
+        host: app.myhost.com
+        # path (optional) Select this app based on path prefix under host
+        path: /app
+      # memory (optional, default: calculated based on plan)
+      memory: 1Gi
+      # replicas (optional, default: 1 or calculated based on HA plan)
+      replicas: 1
+
+    # kind (required, one of app, db, disk)
+    - kind: db
+      # database image (required, only kubesimple/postgres available for now)  
+      image: kubesimple/postgres
+      # memory (optional, default: 512m)
+      memory: 512m
+      # migrate (optional, default: if `./migrate` exists in repo will apply sqlmigrate) Or specify
+      # the location of your sqlmigrate files.
+      migrate: ./migrate
+      # init (optional, specify a file to apply SQL on database creation)
+      init: ./path/to/init.sql
+
+    # kind (required, one of app, db, disk)
+    - kind: disk
+      # size (optional, default: 1Gb)
+      size: 1Gi
+      # path (optional, path to create. See KS_PATH_MOUNT for full path to your disk.)
+      path: /my-app
+      # restricted (optional, default: false. Protect this mountpoint so only this app can access it.)
+      restricted: false
