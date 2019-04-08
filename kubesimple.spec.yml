@@ -34,6 +34,8 @@ services:
       migrate: ./migrate
       # init (optional, specify a file to apply SQL on database creation)
       init: ./path/to/init.sql
+      # replicas (optional, defaults to 1, other replicas will be read replicas only enabled in hot standby for failover)
+      replicas: 1
 
     # kind (required, one of app, db, disk)
     - kind: disk
