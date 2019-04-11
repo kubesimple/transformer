@@ -1,0 +1,39 @@
+[[author]]
+github = "kubesimple"
+public_key = "RWQwuHGlNZzfzRjzHPWmbqmOjy42b9zW6m6LSWI/SBDdWGPX3GS9Dhqj"
+
+[[plugin]]
+kind = "app"
+major_version = "1"
+author = "kubesimple"
+type = "restricted"
+environment = ["prod", "hosted", "dev"]
+signature = <calculated on build>
+
+[[plugin]]
+kind = "postgres"
+major_version = "1"
+author = "kubesimple"
+type = "restricted"
+environment = ["prod", "dev"]
+signature = <calculated>
+
+[[plugin]]
+kind = "disk"
+major_version = "1"
+author = "kubesimple"
+type = "restricted"
+environment = ["prod", "hosted", "dev"]
+signature = <calculated>
+
+# [[plugin]]
+# # name of `kind` of resource this plugin works with
+# kind = myplugin
+# # major version of the resource definition
+# major_version = 1
+# # your github name tied to a matching [author] and minisign public_key
+# author = github-name
+# # publically accessible URL where the AMD64 compiled executable plugin resides
+# url = https://public.place.com/myplugin/ks-plugin-v1.02
+# # the base64-encoded minisign signature or blank to download it from the same place as URL below
+# signature = <minisign signature | base64 (optional, or available at the same URL below as ks-plugin-myplugin-v1.minisig)>

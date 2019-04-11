@@ -1,4 +1,4 @@
-package v1
+package transform
 
 import (
 	"github.com/kubesimple/transformer/context"
