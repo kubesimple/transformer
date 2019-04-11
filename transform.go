@@ -4,17 +4,18 @@ import (
 	"bytes"
 	"fmt"
 
-	v1 "github.com/kubesimple/transformer/v1"
+	"github.com/kubesimple/transformer/context"
+	v1 "github.com/kubesimple/transformer/transform/v1"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
-func Transform() error {
-	return transform(nil)
+func Transform(s context.Session) error {
+	return transform(nil, s)
 }
 
-func transform(b []byte) error {
+func transform(b []byte, s context.Session) error {
 	v := viper.New()
 	setDefaults(v)
 	switch {
@@ -33,7 +34,7 @@ func transform(b []byte) error {
 
 	switch version {
 	case "1":
-		return v1.Parse(v)
+		return v1.Parse(v, s)
 	default:
 		return errors.New(fmt.Sprintf("config: unknown version %s", version))
 	}
